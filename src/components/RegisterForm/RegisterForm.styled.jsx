@@ -23,6 +23,7 @@ export const Form = styled.form`
   display: flex;
   gap: 25px;
   flex-direction: column;
+  position: relative;
 `;
 
 export const FormInput = styled.input`
@@ -76,4 +77,37 @@ export const FormBtn = styled.button`
     box-shadow: rgb(255, 255, 255) -2px -2px 5px,
       rgba(0, 0, 0, 0.24) 2px 2px 5px;
   }
+`;
+export const SvgClose = styled.div`
+  position: absolute;
+  right: 1%;
+  top: 2%;
+  padding: 0;
+  border: 0;
+  width: 19px;
+  height: 20px;
+  background-color: initial;
+  cursor: pointer;
+`;
+export const SvgCloseEmail = styled.div`
+  position: absolute;
+  right: 1%;
+  top: 29%;
+  padding: 0;
+  border: 0;
+  width: 19px;
+  height: 20px;
+  background-color: initial;
+  cursor: pointer;
+`;
+export const SvgWatch = styled.div`
+  position: absolute;
+  right: 1%;
+  top: 57%;
+  padding: 0;
+  border: 0;
+  width: 19px;
+  height: 20px;
+  background-color: initial;
+  cursor: pointer;
 `;

@@ -9,11 +9,23 @@ import {
   FormLabel,
   FormInput,
   FormBtn,
+  SvgCloseEmail,
+  SvgWatch,
 } from './LoginForm.styled';
+import { useState } from 'react';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { selectError } from 'redux/auth/authSelectors';
+import{ReactComponent as LogoClose} from '.././RegisterForm/X.svg'
+import{ReactComponent as LogoWatch} from '.././RegisterForm/Watch.svg'
+import{ReactComponent as LogoNoWatch} from '.././RegisterForm/Nowatch.svg'
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-
+  const [logPassword,setLogPassword]=useState('');
+  const [logEmail,setLogEmail]=useState('');
+  const [flagWatch,setFlagWatch]=useState(false)
+  const error = useSelector(selectError);
+  console.log(error);
   const handleSubmit = e => {
     e.preventDefault();
     const Form = e.currentTarget;
@@ -23,8 +35,21 @@ const LoginForm = () => {
         password: Form.elements.password.value,
       })
     );
-    Form.reset();
+    if(error===null){
+    setLogEmail('')
+    setLogPassword('')
+    }
   };
+  const handleChange = (e)=>{
+    const {name,value}=e.currentTarget;
+
+    if(name==='email'){
+    setLogEmail(value)
+  }
+    else {
+      setLogPassword(value)
+    }
+  }
 
   return (
     <>
@@ -34,14 +59,14 @@ const LoginForm = () => {
         <Form onSubmit={handleSubmit} autoComplete="off">
           <FormLabel>
             E-mail:
-            <FormInput type="email" name="email" />
+            <FormInput type="email" name="email" onChange={handleChange} value={logEmail}/>
           </FormLabel>
-
+          <SvgCloseEmail onClick={()=>{setLogEmail('')}}>{logEmail && <LogoClose/>}</SvgCloseEmail>
           <FormLabel>
             Password:
-            <FormInput type="password" name="password" />
+            <FormInput type={flagWatch ? 'text':'password'} name="password" onChange={handleChange} value={logPassword} />
           </FormLabel>
-
+          <SvgWatch onClick={()=>{setFlagWatch(!flagWatch)}}>{!flagWatch ?<LogoWatch/>:<LogoNoWatch/>}</SvgWatch>
           <FormBtn type="submit">
             <MdOutlineLogin />
             Log In
